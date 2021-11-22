@@ -3,6 +3,7 @@ package com.example.mybatis.controller;
 import com.example.mybatis.mapper.UserMapper;
 import com.example.mybatis.model.Users;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,12 +25,8 @@ import java.util.List;
         }
 
         @GetMapping("/insert")
-        private List<Users> insert(){
-            Users users =new Users();
-            users.setName("Azzam");
-            users.setSalary(50000L);
-
-            userMapper.insert((users));
+        private List<Users> insert(@RequestBody Users user){
+            userMapper.insert(user);
 
             return userMapper.findAll();
 
@@ -44,13 +41,10 @@ import java.util.List;
             return userMapper.findAll();
         }
         @GetMapping("/delete")
-        private List<Users> delete()
+        private List<Users> delete(@RequestBody Users user)
         {
-            Users users=new Users();
-            users.setName("Azzam");
-            users.setSalary(555L);
 
-            userMapper.delete(users);
+            userMapper.delete(user);
             return userMapper.findAll();
         }
 
